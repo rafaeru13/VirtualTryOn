@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pobeguada Flower Store</title>
+    <link rel="stylesheet" href="css-files/home.css" />
+    <link rel="stylesheet" href="css-files/nav.css" />
+  </head>
+  <body>
+    <nav class="navbar"></nav>
+
+    <!---hero section-------->
+    <header class="hero-section">
+      <div class="content">
+        <img src="img/light-logo.png" class="logo" alt="" />
+        <p class="sub-heading">Shop our online store</p>
+      </div>
+    </header>
+    <!--  -------------------cards containers------------------------------------------>
+    <section class="product">
+      <h2 class="product-category">Featured Products</h2>
+      <button class="pre-btn"><img src="img/arrow.png" alt="" /></button>
+      <button class="nxt-btn"><img src="img/arrow.png" alt="" /></button>
+      <div class="product-container" id="flower-details">
+        <!-- Content will be dynamically added here using JavaScript -->
+      </div>
+    </section>
+    <!-- ---------------------collections -------------------------------------->
+    <section class="collection-container">
+      <a href="flowercollection.html" class="collection">
+        <img src="img/flower-collection.png" alt="" />
+        <p class="collection-title">
+          Flower<br />
+          collection
+        </p>
+      </a>
+      <a href="plantscollection.html" class="collection">
+        <img src="img/plants-collection.png" alt="" />
+        <p class="collection-title">
+          plants <br />
+          collection
+        </p>
+      </a>
+      <a href="giftset.html" class="collection">
+        <img src="img/gift-sets.png" alt="" />
+        <p class="collection-title">gift sets</p>
+      </a>
+    </section>
+
+    <footer></footer>
+
+    <!--Call respective javascript files to apply functions of the website -->
+    <script src="js-files/nav.js"></script>
+    <script src="js-files/home.js"></script>
+    <script src="js-files/footer.js"></script>
+    <script src="js-files/app.js"></script>
+    <script src="js-files/buttonfunction.js"></script>
+    <script src="js-files/checkout.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyACTq2o6XTmoWj4_ChmBgp0xAjkzadVLVk",
+        authDomain: "pobeguada.firebaseapp.com",
+        projectId: "pobeguada",
+        storageBucket: "pobeguada.appspot.com",
+        messagingSenderId: "288272288691",
+        appId: "1:288272288691:web:c5b87ca1e321f2bd8459c6",
+        measurementId: "G-D2MZHWEXTJ",
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Call the function for the initial rendering
+            renderFlowersInRange(1,7);
+        });
+        
+        
+    </script>
+    
+  </body>
+</html>
