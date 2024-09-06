@@ -1,0 +1,164 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  opacity: 0; 
+  animation: fadeIn 1s ease-in-out forwards; 
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* ends */
+
+/* Loading Screen Styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* ends */
+
+
+/* pumping animation text */
+@keyframes pump {
+0% { transform: scale(1); }
+50% { transform: scale(1.2); }
+100% { transform: scale(1); }
+}
+
+.text-animation {
+  animation-name: pump;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.text-animation2 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.text-animation2.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* end */
+
+/* text gradient color animation */
+.animate-character
+{
+ text-transform: uppercase;
+background-image: linear-gradient(
+  -225deg,
+  #ecd999 0%,
+  #e88fa9 14%,
+  #b54c58 28%,
+  #9b1123 42%,
+  #4e3312 56%,
+  #44580b 70%,
+  #617d1e 84%,
+  #e6c2ac 100%
+);
+background-size: auto auto;
+background-clip: border-box;
+background-size: 200% auto;
+color: #fff;
+background-clip: text;
+text-emphasis-color: transparent;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: textclip 2s linear infinite;
+display: inline-block;
+}
+
+@keyframes textclip {
+to {
+  background-position: 200% center;
+}
+}
+/* end */
+
+/* enlarge image when hovered */
+.image-container {
+display: flex;
+justify-content: center;
+}
+
+.image {
+width: 300px;
+height: 300px;
+margin: 10px;
+transition: transform 0.3s ease;
+}
+
+.image:hover {
+transform: scale(1.1);
+}
+/* end */
+
+/* Cart item check animation in cart sidebar */
+.check-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(162, 90, 120, 0.5);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.animate-check {
+  opacity: 1;
+  animation: checkScale 0.3s ease-in-out forwards;
+}
+
+@keyframes checkScale {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Cashier Checkout</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/inter-ui@3.11.0/inter.min.css'>
+  <link rel="stylesheet" href="./checkout.css">
+</head>
+<body>
+  <section>
+  <div class="title-page">
+    <h1 class="animate-character">Little Blossom</h1>
+    <p>When words just won’t do…send a flower!</p>
+  </div>
+  <div class="row">
+    <div class="col-75">
+      <div class="container">
+        <form id="checkout-form" action="/action_page.php">
+          <div class="row">
+            <div class="col-50">
+          
+              <h3>Order Form</h3>
+              <label for="fname"><i class="fa fa-user"></i> Full Name<font color="red">*</font></label>
+              <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+              <label for="email"><i class="fa fa-envelope"></i> Email<font color="red">*</font></label>
+              <input type="text" id="email" name="email" placeholder="john@example.com">
+              <label for="adr"><i class="fa fa-address-card-o"></i> Address<font color="red">*</font></label>
+              <input type="text" id="adr" name="address" placeholder="My Street">
+              <label for="city"><i class="fa fa-institution"></i> City<font color="red">*</font></label>
+              <input type="text" id="city" name="city" placeholder="Quezon City">
+              <div class="row">
+                <div class="col-50">
+                  <label for="state">State<font color="red">*</font></label>
+                  <input type="text" id="state" name="state" placeholder="PH">
+                </div>
+                <div class="col-50">
+                  <label for="zip">Zip<font color="red">*</font></label>
+                  <input type="text" id="zip" name="zip" placeholder="1121">
+                </div>
+              </div>
+            </div>
+            <div class="col-50">
+              <h3>Payment Options</h3>
+              <label for="payment">Payment Method<font color="red">*</font></label>
+              <select id="payment" name="payment" onchange="handlePaymentChange()">
+                <option value="choose">Select Payment Method</option>
+                <option value="online">Online Payment</option>
+                <option value="cod">Cash on Delivery</option>
+              </select>
+            
+              <div id="additional-selection" style="display: none;">
+                <label for="additional">Chooose your payment<font color="red">*</font></label>
+                <select id="additional" name="additional">
+                  <option value="option0">Choose your payment</option>
+                  <option value="option1">Gcash</option>
+                  <option value="option2">Paypal</option>
+                  <option value="option3">Bank Transfer</option>
+                </select>
+              </div>
+              <div>
+                <label for="textarea">Custom Message</label>
+                <textarea id="message" rows="4" placeholder="Type here" cols="50" maxlength="200" oninput="updateCounter()"></textarea>
+                <p id="counter">Characters remaining: 200</p>
+              </div>
+            </div>
+
+          </div>
+
+          <label>
+            <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+          </label>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="col-25">
+      <div class="container">
+        <div>
+          <h4>Your Total Bill,</h4>
+          <div class="total-price">
+             <span id="total-price-value"></span>
+          </div>
+
+            <button class="truck-button">
+                <span class="default">Complete Order</span>
+                <span class="success">
+                    Order Placed
+                    <svg viewbox="0 0 12 10">
+                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                    </svg>
+                </span>
+                <div class="truck">
+                    <div class="wheel"></div>
+                    <div class="back"></div>
+                    <div class="front"></div>
+                    <div class="box"></div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="social-media">   
+            <p>Email: littleblossom@gmail.com</p>
+            <p>Phone: 123-456-7890</p>
+            <p>&copy; 2023 Little Blossom. All rights reserved.</p>
+          </div>
+        </footer>
+        </section>
+
+<div id="PopupMSG" class="Popup">
+  <div class="Popup-content">
+    <span class="close">&times;</span>
+    <h3>Order Confirmation</h3>
+    <p>Your order has been placed successfully!</p>
+    <p>Do you want to download the receipt?</p>
+    <button id="downloadButton">Download Receipt</button>
+    <button id="returnHomeButton">Return Home</button>
+  </div>
+</div>
+
+<script>
+  // Function to get the value of a query parameter from the URL
+    function getQueryParam(param) {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      return urlParams.get(param);
+    }
+    
+    // Retrieve the total price from the query parameter
+    const totalPriceValue = getQueryParam("totalPrice");
+    
+    // Display the total price on the page
+    const totalElement = document.querySelector("#total-price-value");
+    totalElement.textContent = `₱${totalPriceValue}`;
+    </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js'></script>
+<script  src="./checkout.js"></script>
+
+</body>
+</html>

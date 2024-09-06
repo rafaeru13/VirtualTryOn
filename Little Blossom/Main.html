@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Little Blossom</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    
+</head>
+<body>
+
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="item-image check-animation">
+        <img src="${productImage}" alt="${productName}" class="cart-item-image">
+      </div>      
+
+    <header id = "home">
+        <nav id="navbar">
+            <div class="logo">
+                <a href="#"><img src="images/logo2.png" alt="Logo"></a>
+              </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" id="cart-button">Cart</a></li>
+            </ul>
+            <span class="quantity">0</span>
+        </nav>
+        
+        <h1 class="animate-character">Little Blossom</h1>
+        <p>When words just won’t do…send a flower!</p>
+        <a href="#products" class="shopnow">Shop Now</a>
+    </header>
+    <main>
+        <div id="sidebar" class="sidebar">
+            <h2>Shopping Cart</h2>
+            <div class="cart-items">
+            </div>
+            <div class="sidebar-bottom">
+              <div class="total-price">PHP0.00</div>
+              <button id="checkout-button">Checkout</button>
+              <button id="close-button" onclick="closeNav()">Close</button>
+            </div>
+          </div>
+
+        <section id="about">
+            <h2 class="scroll-animation">About</h2>
+            <p class="scroll-animation">
+                Welcome to our flower shop, where we truly believe in the beauty of simplicity. 
+                Whether you're planning a small gathering, sending a heartfelt gift, 
+                or simply looking to brighten up your home, we're here to make the process of buying 
+                flowers easy and accessible for you.</p>
+            <img src="images/about.png" width="700px" height="400px" alt="about-image">
+        </section>    
+
+        <div class="h-divider">
+            <div class="shadow"></div>
+            <div class="text2"><img src="https://t1.gstatic.com/images?q=tbn:ANd9GcQsmMfybMIwoE5etmOIAuvnFWdfv_8C1Bq15urJFqwhhI55FyYNP2YuUA" /></div>
+        </div>
+
+        <section id="hot-deals">
+            <h2 class="text-animation">Hot Deals</h2>
+            <h1 class="scroll-animation">New Release</h1>
+
+            <div class="product">
+                <img src="Flowers/Ranunculus.png" alt="">
+                <h3>Ranunculus</h3>
+                <p>PHP 112</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div class="product">
+                <img src="Flowers/hydrangea.png" alt="">
+                <h3>Hydrangea</h3>
+                <p>PHP 50</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+              </div>
+              <div class="product">
+                <img src="Flowers/Gerberas.png" alt="">
+                <h3>Gerberas</h3>
+                <p>PHP 18</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+                </p>
+              </div>
+        </section>
+
+        <section id="products">
+            <h2 class="scroll-animation">Our Products</h2>
+            <div class="image-container">
+                <a href="#flowers">
+                  <img src="images/s1.png" alt="Image 1" class="image">
+                </a>
+                <a href="#bouquets">
+                  <img src="images/b1.png" alt="Image 2" class="image">
+                </a>
+            </div>
+        </section>
+
+        <section id="flowers">
+            <h2 class="scroll-animation">Single Flower List</h2>
+            <div id="0" class="flowers">
+                <div class="Flower-img">
+                    <img src="Flowers/Alliums.png" class="flower-image">
+                    <div class="hover-text">Are unique and eye-catching flowers characterized by spherical clusters of small blooms on tall, sturdy stems, creating a whimsical and architectural presence in gardens, 
+                    symbolizing unity, resilience, and the beauty of diversity.</div>
+                </div>
+                <div class="description">
+                <h3 >Alliums</h3>
+                <p>PHP 99.00</p>
+                <!-- <p >Are unique and eye-catching flowers characterized by spherical clusters of small blooms on tall, sturdy stems, creating a whimsical and architectural presence in gardens.</p> -->
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="1" class="flowers">
+                <div class="Flower-img">
+                <img src="Flowers/Alstroemeria.png" alt="">
+                <div class="hover-text">Astroemeria, also known as Peruvian lilies, are delicate and elegant flowers with vibrant petals that display a unique combination of colors and patterns.</div>
+                </div>
+                <h3 >Astroemeria</h3>
+                <p>PHP 12.50</p>
+                <!-- <p >Astroemeria, also known as Peruvian lilies, are delicate and elegant flowers with vibrant petals that display a unique combination of colors and patterns.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="2" class="flowers">
+                <img src="Flowers/Anemones.png" alt="">
+                <div class="hover-text">A cup-shaped petals in various shades, creating a dramatic contrast against their dark centers, and symbolizing anticipation, fragility, and protection from evil.</div>
+                <h3 >Anemones</h3>
+                <p>PHP 60.00</p>
+                <!-- <p >A cup-shaped petals in various shades, creating a dramatic contrast against their dark centers, and symbolizing anticipation, fragility, and protection from evil.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="3" class="flowers">
+                <img src="Flowers/Baby_s Breath.png" alt="">
+                <div class="hover-text">Is a dainty and airy flowering plant with numerous small white or pale pink blooms.</div>
+                <h3 >Baby's Breath</h3>
+                <p>PHP 106.75</p>
+                <!-- <p >Is a dainty and airy flowering plant with numerous small white or pale pink blooms.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="4" class="flowers">
+                <img src="Flowers/Carnations.png" alt="">
+                <div class="hover-text">Carnations are classic flowers with ruffled petals and a wide array of colors, known for their longevity, sweet fragrance, and symbolizing love, fascination, and admiration.</div>
+                <h3 >Carnations</h3>
+                <p>PHP 180.00</p>
+                <!-- <p >Carnations are classic flowers with ruffled petals and a wide array of colors, known for their longevity, sweet fragrance, and symbolizing love, fascination, and admiration.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="5" class="flowers">
+                <img src="Flowers/chrysanthemum.png" alt="">
+                <div class="hover-text">Chrysanthemums are stunning and diverse flowers that come in a myriad of shapes, sizes, and colors, symbolizing joy, longevity, and abundance.</div>
+                <h3 >Chrysanthemum</h3>
+                <p>PHP 180.00</p>
+                <!-- <p >Chrysanthemums are stunning and diverse flowers that come in a myriad of shapes, sizes, and colors, symbolizing joy, longevity, and abundance.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="6" class="flowers">
+                <img src="Flowers/Craspedia.png" alt="">
+                <div class="hover-text">Also known as Drumstick flowers, are distinctive spherical blooms with vibrant yellow or golden heads atop cheerful touch to floral arrangements and gardens.</div>
+                <h3 >Craspedia</h3>
+                <p>PHP 40.00</p>
+                <!-- <p >Also known as Drumstick flowers, are distinctive spherical blooms with vibrant yellow or golden heads atop cheerful touch to floral arrangements and gardens.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="7" class="flowers">
+                <img src="Flowers/Daisies.png" alt="">
+                <div class="hover-text">Daisies are simple yet charming flowers with delicate white petals surrounding a bright yellow center, evoking purity, innocence, and a touch of playful whimsy.</div>
+                <h3 >Daisies</h3>
+                <p>PHP 200.00</p>
+                <!-- <p >Daisies are simple yet charming flowers with delicate white petals surrounding a bright yellow center, evoking purity, innocence, and a touch of playful whimsy.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="8" class="flowers">
+                <img src="Flowers/dried eucalyptus.png" alt="">
+                <div class="hover-text">A fragrant and decorative botanical material with preserved silvery-green leaves that add a touch of natural beauty and a soothing aroma to floral arrangements and home decor.</div>
+                <h3 >Dried Eucalyptus</h3>
+                <p>PHP 35.00</p>
+                <!-- <p >A fragrant and decorative botanical material with preserved silvery-green leaves that add a touch of natural beauty and a soothing aroma to floral arrangements and home decor.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="9" class="flowers">
+                <img src="Flowers/Dried Gypsophila.png" alt="">
+                <div class="hover-text">A delicate and airy botanical element featuring clusters of small white flowers, perfect for adding a soft and romantic touch to floral arrangements and crafts.</div>
+                <h3 >Dried Gypsophila</h3>
+                <p>PHP 30.00</p>
+                <!-- <p >A delicate and airy botanical element featuring clusters of small white flowers, perfect for adding a soft and romantic touch to floral arrangements and crafts.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="10" class="flowers">
+                <img src="Flowers/Gerberas.png" alt="">
+                <div class="hover-text">Gerberas are vibrant and cheerful daisy-like flowers that come in a wide range of colors, making them popular choices for bouquets and garden displays.</div>
+                <h3 >Gerberas</h3>
+                <p>PHP 18.00</p>
+                <!-- <p >Gerberas are vibrant and cheerful daisy-like flowers that come in a wide range of colors, making them popular choices for bouquets and garden displays.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="11" class="flowers">
+                <img src="Flowers/hydrangea.png" alt="">
+                <div class="hover-text">Hydrangea is a versatile flowering plant known for its large, colorful clusters of flowers and its ability to thrive in various climates and soil types.</div>
+                <h3 >Hydrangea</h3>
+                <p>PHP 50.00</p>
+                <!-- <p >Hydrangea is a versatile flowering plant known for its large, colorful clusters of flowers and its ability to thrive in various climates and soil types.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="12" class="flowers">
+                <img src="Flowers/Lavender.png" alt="">
+                <div class="hover-text">Is a fragrant and versatile herb with slender purple blooms and silver-green foliage, its ability to add a touch of elegance to floral arrangements.</div>
+                <h3 >Lavender</h3>
+                <p>PHP 20.00</p>
+                <!-- <p >Is a fragrant and versatile herb with slender purple blooms and silver-green foliage, its ability to add a touch of elegance to floral arrangements.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="13" class="flowers">
+                <img src="Flowers/Peonies.png" alt="">
+                <div class="hover-text">Peonies are luxurious, fragrant flowers with voluminous blooms in various shades, embodying grace, abundance, and a sense of serenity.</div>
+                <h3 >Peonies</h3>
+                <p>PHP 168.55</p>
+                <!-- <p >Peonies are luxurious, fragrant flowers with voluminous blooms in various shades, embodying grace, abundance, and a sense of serenity.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="14" class="flowers">
+                <img src="Flowers/Ranunculus.png" alt="">
+                <div class="hover-text">Ranunculus are exquisite flowers with layers of delicate, papery petals in a wide range of colors, known for their vibrant beauty and graceful appearance.</div>
+                <h3 >Ranunculus</h3>
+                <p>PHP 112.00</p>
+                <!-- <p >Ranunculus are exquisite flowers with layers of delicate, papery petals in a wide range of colors, known for their vibrant beauty and graceful appearance.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="15" class="flowers">
+                <img src="Flowers/Roses.png" alt="">
+                <div class="hover-text">Roses are exquisite flowering plants renowned for their beauty, fragrance, and symbolic representation of love and romance.</div>
+                <h3 >Roses</h3>
+                <p>PHP 40.00</p>
+                <!-- <p >Roses are exquisite flowering plants renowned for their beauty, fragrance, and symbolic representation of love and romance.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="16" class="flowers">
+                <img src="Flowers/Sunflower.png" alt="">
+                <div class="hover-text">Sunflowers are vibrant and cheerful flowering plants with large, golden-yellow blooms that turn towards the sun, symbolizing warmth, happiness, and optimism.</div>
+                <h3 >Sunflowers</h3>
+                <p>PHP 150.00</p>
+                <!-- <p >Sunflowers are vibrant and cheerful flowering plants with large, golden-yellow blooms that turn towards the sun, symbolizing warmth, happiness, and optimism.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="17" class="flowers">
+                <img src="Flowers/Tulips.png" alt="">
+                <div class="hover-text">Tulips are graceful, vibrant flowers with a wide variety of colors, symbolizing elegance and springtime beauty.</div>
+                <h3 >Tulips</h3>
+                <p>PHP 90.00</p>
+                <!-- <p >Tulips are graceful, vibrant flowers with a wide variety of colors, symbolizing elegance and springtime beauty.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+        </section>
+
+        <section id="bouquets">
+            <h2 class="scroll-animation">Bouquets List</h2>
+            <div id="01" class="bouquets">
+                <img src="Bouquets/bouquet Rose _ Eucalyptus Dried.png" alt="bouquet1">
+                <div class="hover-text">A captivating bouquet blending timeless roses and dried eucalyptus, merging elegance with rustic charm and a subtle touch of natural fragrance.</div>
+                <h3 >Peachy Passion</h3>
+                <p>PHP 550.00</p>
+                <!-- <p >A captivating bouquet blending timeless roses and dried eucalyptus, merging elegance with rustic charm and a subtle touch of natural fragrance.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="02" class="bouquets">
+                <img src="Bouquets/bouquet Dried Gypsophila and Eucalyptus.png" alt="bouquet2">
+                <div class="hover-text">A delicate pairing of dried gypsophila and eucalyptus leaves, adding whimsy and tranquility to any space with their ethereal beauty and soothing aromatics.</div>
+                <h3 >Amber Awe</h3>
+                <p>PHP 380.00</p>
+                <!-- <p >A delicate pairing of dried gypsophila and eucalyptus leaves, adding whimsy and tranquility to any space with their ethereal beauty and soothing aromatics.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="03" class="bouquets">
+                <img src="Bouquets/bouquet white baby_s breath, lavender, Dried eucalyptus.png" alt="bouquet3">
+                <div class="hover-text">A serene fusion of delicate white baby's breath, fragrant lavender, and dried eucalyptus, creating a harmonious bouquet that emanates pure tranquility and natural beauty</div>
+                <h3 >Scents of Heaven</h3>
+                <p>PHP 480.00</p>
+                <!-- <p >A serene fusion of delicate white baby's breath, fragrant lavender, and dried eucalyptus, creating a harmonious bouquet that emanates pure tranquility and natural beauty.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="04" class="bouquets">
+                <img src="Bouquets/bouquet soft pink gerberas, roses, and carnations, and frills of white aster.png" alt="bouquet3">
+                <div class="hover-text">An enchanting composition of pink gerberas, roses, and carnations, adorned with delicate white aster, creating a delightful blend of vibrant colors, textures, and elegance.</div>
+                <h3 >It's a Girl</h3>
+                <p>PHP 660.00</p>
+                <!-- <p >An enchanting composition of pink gerberas, roses, and carnations, adorned with delicate white aster, creating a delightful blend of vibrant colors, textures, and elegance.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="05" class="bouquets">
+                <img src="Bouquets/bouquet Pink and Red Roses, Eucalyptus leaf.png" alt="bouquet3">
+                <div class="hover-text">A mesmerizing bouquet of passionate red and romantic pink roses, adorned with elegant presence of eucalyptus leaves, exuding love and tranquility.</div>
+                <h3 >My Valentine</h3>
+                <p>PHP 630.00</p>
+                <!-- <p >A mesmerizing bouquet of passionate red and romantic pink roses, adorned with elegant presence of eucalyptus leaves, exuding love and tranquility.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+            <div id="06" class="bouquets">
+                <img src="Bouquets/bouquet Selene Carnation _ Rose.png" alt="bouquet3">
+                <div class="hover-text">A captivating arrangement of Selene carnations and roses that combines gentle shades and velvety textures, exuding an everlasting allure and elegance.</div>
+                <h3 >Love is...</h3>
+                <p>PHP 500.00</p>
+                <!-- <p >A captivating arrangement of Selene carnations and roses that combines gentle shades and velvety textures, exuding an everlasting allure and elegance.</p> -->
+                <button class="add-to-cart">Add to Cart</button>
+                <div class="cart-animation"></div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section>
+            <div id="delivery-options">
+                <div class="divider"> </div>
+                <ul>
+                  <li>
+                    <img src="icon/do1.png" width="50px" height="50px" alt="Same Day Delivery">
+                    <div class="option1-info">
+                      <h3>Same Day Delivery</h3>
+                      <p>Get your order delivered <br>on the same day!</p>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="icon/do2.png" width="50px" height="50px" alt="Fresh Flowers Guaranteed">
+                    <div class="option1-info">
+                      <h3>Fresh Flowers Guaranteed</h3>
+                      <p>Enjoy fresh and beautiful <br>flowers every time!</p>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="icon/do3.png" width="50px" height="50px" alt="Flowers Arranged by Top Rated Local Florist">
+                    <div class="option1-info">
+                      <h3>Arranged by Local Florist</h3>
+                      <p>Experience the artistry of <br>our top-rated local florists!</p>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="icon/do4.png" width="50px" height="50px" alt="Nationwide Delivery">
+                    <div class="option1-info">
+                      <h3>Nationwide Delivery</h3>
+                      <p>Send flowers anywhere in <br>the country with ease!</p>
+                    </div>
+                  </li>
+                </ul>
+                <div class="divider1"></div>
+              </div>
+        </section>
+
+        <section id="comments">
+            <h2>What Our Customers Are Saying...</h2>
+            <div class="comments">
+              <img class="slide" src="images/1.png" alt="Photo 1">
+              <img class="slide" src="images/2.png" alt="Photo 2">
+              <img class="slide" src="images/3.png" alt="Photo 3">
+              <img class="slide" src="images/4.png" alt="Photo 4">
+              <img class="slide" src="images/5.png" alt="Photo 5">
+              <img class="slide" src="images/6.png" alt="Photo 6">
+            </div>
+          </div> 
+    </section>
+
+        <div class="h-divider">
+            <div class="shadow"></div>
+        </div>
+
+        <section id="team">
+            <h2 class="scroll-animation">Meet our Team</h2>
+            <p class="scroll-animation"> Building lasting relationships with our customers is at the core of what we do. 
+                Your satisfaction is our utmost priority, and we strive to go above and beyond to 
+                exceed your expectations. Our team of experts is always ready to provide personalized
+                 advice, helping you select the arrangement that truly reflects your sentiments.</p>
+            <div class="team">
+                <img src="images/arandia.jpg" alt="Member1">
+                <h3 >Cyrus Arandia</h3>
+                <p>Graphic Designer</p>
+            </div>
+            <div class="team">
+                <img src="images/avila.png" alt="Member2">
+                <h3 >John Mark Avila</h3>
+                <p>Documentation</p>
+            </div>
+            <div class="team">
+                <img src="images/tan.jpeg" alt="Member3">
+                <h3 >Nathaniel Josh Tan</h3>
+                <p>Documentation</p>
+            </div>
+            <div class="team">
+                <img src="images/tevar.jpg" alt="Member4">
+                <h3 >Jannah Gem Tevar</h3>
+                <p>Product Owner<br> Solution Architect</p>
+            </div>
+            <div class="team">
+                <img src="images/tungpalan.jpg" alt="Member5">
+                <h3 >Princess Arielle Tungpalan</h3>
+                <p>Full Stack Developer<br>UX/UI Designer</p>
+            </div>
+            <div class="team">
+                <img src="images/yan.png" alt="Member6">
+                <h3 >Michael James Yan</h3>
+                <p>Full Stack Developer<br>UX/UI Designer</p>
+            </div>
+        </section>
+
+
+
+        <section id="contact">
+            <h2 class="scroll-animation">Keep in Touch</h2>
+            <p class="scroll-animation">Thank you for considering our small flower shop. We're truly excited to have 
+                the opportunity to serve you and bring your floral dreams to life. 
+                Let us be a part of your special moments, and together, we'll create something beautiful.</p>
+            <form action="submit-form.php" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+    </main>
+    <footer>
+        <div class="social-media">          
+          <p>Email: littleblossom@gmail.com</p>
+          <p>Phone: 123-456-7890</p>
+          <p>&copy; 2023 Little Blossom. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="main.js"></script>
+</body>
+</html>
