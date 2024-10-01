@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Overlay Simulation</title>
+    <style>
+        .container {
+            position: relative;
+            width: 300px; /* Fixed width for the user image container */
+            height: 500px; /* Fixed height for the user image container */
+            border: 2px solid #000;
+            overflow: hidden; /* Ensure images stay within the box */
+        }
+        
+        #userImage, #clothingImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #clothingImage {
+            pointer-events: none; /* Prevent interactions with the clothing image */
+        }
+    </style>
+</head>
+<body>
+
+<h2>Upload Your Image and Clothing Image</h2>
+<div class="container">
+    <img id="userImage" src="" alt="User Image">
+    <img id="clothingImage" src="" alt="Clothing Image">
+</div>
+
+<br>
+<label for="userHeight">Enter your height (in feet):</label>
+<input type="number" id="userHeight" placeholder="e.g. 6" min="0" step="0.1">
+
+<label for="clothingSize">Select clothing size:</label>
+<select id="clothingSize">
+    <option value="small">Small (66cm x 46cm)</option>
+    <option value="medium">Medium (70cm x 50cm)</option>
+    <option value="large">Large (74cm x 54cm)</option>
+</select>
+
+<input type="file" id="userUpload" accept="image/*">
+<input type="file" id="clothingUpload" accept="image/*">
+<button onclick="uploadImages()">Overlay Clothing</button>
+
+<script>
+    const userImage = document.getElementById('userImage');
+    const clothingImage = document.getElementById('clothingImage');
+    const containerHeight = 500; // This is the fixed height of the box/container (in pixels)
+
+    function uploadImages() {
+        const userFile = document.getElementById('userUpload').files[0];
+        const clothingFile = document.getElementById('clothingUpload').files[0];
+
+        if (userFile) {
+            const userReader = new FileReader();
+            userReader.onload = function (event) {
+                userImage.src = event.target.result; // Set the user's image
+            };
+            userReader.readAsDataURL(userFile);
+        }
+
+        if (clothingFile) {
+            const clothingReader = new FileReader();
+            clothingReader.onload = function (event) {
+                clothingImage.src = event.target.result; // Set the clothing image
+            };
+            clothingReader.readAsDataURL(clothingFile);
+        }
+    }
+
+    function resizeClothing() {
+        const userHeight = parseFloat(document.getElementById('userHeight').value);
+        const clothingSize = document.getElementById('clothingSize').value;
+
+        if (!userHeight) {
+            alert('Please enter your height.');
+            return;
+        }
+
+        // Convert user height from feet to centimeters (1 foot = 30.48 cm)
+        const userHeightCm = userHeight * 30.48;
+
+        // Define real clothing dimensions (in cm) for small, medium, and large
+        let clothingLength, clothingWidth;
+        switch (clothingSize) {
+            case 'small':
+                clothingLength = 66;
+                clothingWidth = 46;
+                break;
+            case 'medium':
+                clothingLength = 70;
+                clothingWidth = 50;
+                break;
+            case 'large':
+                clothingLength = 74;
+                clothingWidth = 54;
+                break;
+            default:
+                alert('Please select a clothing size.');
+                return;
+        }
+
+        // Calculate the scaling factor to fit the clothing proportionally in the box
+        const scaleFactor = (clothingLength / userHeightCm); // Compare clothing length to user's height
+
+        // Calculate how much space the clothing should take in the box (relative to user height)
+        const clothingHeightInBox = containerHeight * scaleFactor; // Scaled clothing height in pixels
+        
+        // Set the clothing image size based on the calculated height in the box
+        clothingImage.style.height = `${clothingHeightInBox}px`;
+        clothingImage.style.width = 'auto'; // Maintain aspect ratio for width
+    }
+
+    // Add event listeners to resize clothing after both images are loaded
+    userImage.onload = resizeClothing;
+    clothingImage.onload = resizeClothing;
+</script>
+
+</body>
+</html>

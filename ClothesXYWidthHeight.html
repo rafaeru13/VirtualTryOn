@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Overlay</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .control {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="controls">
+        <div class="control">
+            <label for="x-position">X Position:</label>
+            <input type="range" id="x-position" min="0" max="500" value="50">
+        </div>
+        <div class="control">
+            <label for="y-position">Y Position:</label>
+            <input type="range" id="y-position" min="0" max="500" value="100">
+        </div>
+        <div class="control">
+            <label for="width">Clothing Width:</label>
+            <input type="range" id="width" min="50" max="300" value="150">
+        </div>
+        <div class="control">
+            <label for="height">Clothing Height:</label>
+            <input type="range" id="height" min="50" max="300" value="150">
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const personImage = new Image();
+        const clothingImage = new Image();
+        personImage.src = 'man.jpg';  // Replace with the path to the person image
+        clothingImage.src = 't shirt.png';  // Replace with the path to the clothing image
+
+
+        // Default values
+        let clothingX = 50;
+        let clothingY = 100;
+        let clothingWidth = 150;
+        let clothingHeight = 150;
+
+        // Load person image
+        personImage.onload = () => {
+            canvas.width = personImage.width;
+            canvas.height = personImage.height;
+            ctx.drawImage(personImage, 0, 0);
+
+            // Load clothing image and draw
+            clothingImage.onload = () => {
+                drawClothing();
+            };
+        };
+
+        // Function to draw clothing image
+        function drawClothing() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear
+            ctx.drawImage(personImage, 0, 0); // Redraw person image
+            ctx.drawImage(clothingImage, clothingX, clothingY, clothingWidth, clothingHeight); // Draw clothing
+        }
+
+        // Add event listeners for sliders
+        document.getElementById('x-position').addEventListener('input', (e) => {
+            clothingX = parseInt(e.target.value);
+            drawClothing();
+        });
+
+        document.getElementById('y-position').addEventListener('input', (e) => {
+            clothingY = parseInt(e.target.value);
+            drawClothing();
+        });
+
+        document.getElementById('width').addEventListener('input', (e) => {
+            clothingWidth = parseInt(e.target.value);
+            drawClothing();
+        });
+
+        document.getElementById('height').addEventListener('input', (e) => {
+            clothingHeight = parseInt(e.target.value);
+            drawClothing();
+        });
+    </script>
+</body>
+</html>
