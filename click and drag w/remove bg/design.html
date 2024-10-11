@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Overlay with Background Removal</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            width: 300px;
+            height: 500px;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .control {
+            margin: 5px;
+        }
+        .loading {
+            display: none;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Upload Your Image and Clothing Image</h2>
+<canvas id="canvas" width="300" height="500"></canvas>
+
+<div class="controls">
+    <input type="file" id="userUpload" accept="image/*">
+    <input type="file" id="clothingUpload" accept="image/*">
+    <button onclick="uploadImages()">Overlay Clothing</button>
+</div>
+
+<div class="loading">Processing image, please wait...</div>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const userImage = new Image();
+    const clothingImage = new Image();
+
+    let clothingX = 0;
+    let clothingY = 0;
+    let clothingWidth = 150;
+    let clothingHeight = 150;
+    let isDragging = false;
+
+    // API Key for RemoveBG (you'll need to replace this with your own key)
+    const removeBgApiKey = 'vFw5rFNQVkgqjJbrK8PH1N99';
+
+    async function uploadImages() {
+        const userFile = document.getElementById('userUpload').files[0];
+        const clothingFile = document.getElementById('clothingUpload').files[0];
+
+        if (userFile) {
+            const userReader = new FileReader();
+            userReader.onload = function (event) {
+                userImage.src = event.target.result;
+                userImage.onload = drawUserImage;
+            };
+            userReader.readAsDataURL(userFile);
+        }
+
+        if (clothingFile) {
+            const clothingReader = new FileReader();
+            clothingReader.onload = async function (event) {
+                const loading = document.querySelector('.loading');
+                loading.style.display = 'block';
+
+                const formData = new FormData();
+                formData.append('image_file', clothingFile);
+                formData.append('size', 'auto');
+
+                try {
+                    const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+                        method: 'POST',
+                        headers: {
+                            'X-Api-Key': removeBgApiKey
+                        },
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const outputURL = URL.createObjectURL(blob);
+
+                        clothingImage.src = outputURL;
+                        clothingImage.onload = drawClothing;
+                    } else {
+                        alert('Error: Unable to remove background');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error: Unable to process the image');
+                } finally {
+                    loading.style.display = 'none';
+                }
+            };
+            clothingReader.readAsDataURL(clothingFile);
+        }
+    }
+
+    function drawUserImage() {
+        ctx.drawImage(userImage, 0, 0, canvas.width, canvas.height);
+    }
+
+    function drawClothing() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawUserImage();
+        ctx.drawImage(clothingImage, clothingX, clothingY, clothingWidth, clothingHeight);
+    }
+
+    // Add event listeners for dragging the clothing
+    canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Check if the mouse is over the clothing image
+        if (mouseX >= clothingX && mouseX <= clothingX + clothingWidth && mouseY >= clothingY && mouseY <= clothingY + clothingHeight) {
+            isDragging = true;
+        }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Update clothing position based on mouse movement
+            clothingX = mouseX - clothingWidth / 2;
+            clothingY = mouseY - clothingHeight / 2;
+
+            drawClothing();
+        }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        isDragging = false;
+    });
+
+</script>
+
+</body>
+</html>
