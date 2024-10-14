@@ -5,29 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Overlay Simulation</title>
     <style>
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        canvas {
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-            width: 300px;  /* Fixed width */
-            height: 500px; /* Fixed height */
-        }
-        .controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .control {
-            margin: 5px;
-        }
         .container {
             position: relative;
             width: 300px; /* Fixed width for the user image container */
@@ -35,76 +12,69 @@
             border: 2px solid #000;
             overflow: hidden; /* Ensure images stay within the box */
         }
+        
+        #userImage, #clothingImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #clothingImage {
+            pointer-events: none;
+        }
+
+        .controls {
+            margin-top: 10px;
+        }
+
+        .controls button {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
 
 <h2>Upload Your Image and Clothing Image</h2>
 <div class="container">
-    <canvas id="canvas" width="300" height="500"></canvas>
+    <img id="userImage" src="" alt="User Image">
+    <img id="clothingImage" src="" alt="Clothing Image">
 </div>
 
+<br>
+<label for="userHeight">Enter your height (in feet):</label>
+<input type="number" id="userHeight" placeholder="e.g. 6" min="0" step="0.1">
+
+<label for="clothingSize">Select clothing size:</label>
+<select id="clothingSize">
+    <option value="small">Small (66cm x 46cm)</option>
+    <option value="medium">Medium (70cm x 50cm)</option>
+    <option value="large">Large (74cm x 54cm)</option>
+</select>
+
+<input type="file" id="userUpload" accept="image/*">
+<input type="file" id="clothingUpload" accept="image/*">
+<button onclick="uploadImages()">Overlay Clothing</button>
+
+<!-- Draggable Button Controls -->
 <div class="controls">
-    <div class="control">
-        <label for="userHeight">Enter your height (in feet):</label>
-        <input type="number" id="userHeight" placeholder="e.g. 6" min="0" step="0.1">
-    </div>
-    <div class="control">
-        <label for="clothingSize">Select clothing size:</label>
-        <select id="clothingSize">
-            <option value="small">Small (66cm x 46cm)</option>
-            <option value="medium">Medium (70cm x 50cm)</option>
-            <option value="large">Large (74cm x 54cm)</option>
-        </select>
-    </div>
-    <div class="control">
-        <input type="file" id="userUpload" accept="image/*">
-        <input type="file" id="clothingUpload" accept="image/*">
-        <button onclick="uploadImages()">Overlay Clothing</button>
-    </div>
-    <div class="control">
-        <label for="x-position">X Position:</label>
-        <input type="range" id="x-position" min="0" max="300" value="0">
-    </div>
-    <div class="control">
-        <label for="y-position">Y Position:</label>
-        <input type="range" id="y-position" min="0" max="500" value="0">
-    </div>
-    <div class="control">
-        <label for="width">Clothing Width:</label>
-        <input type="range" id="width" min="50" max="300" value="150">
-    </div>
-    <div class="control">
-        <label for="height">Clothing Height:</label>
-        <input type="range" id="height" min="50" max="300" value="150">
-    </div>
+    <button onclick="moveClothing('left')">Move Left</button>
+    <button onclick="moveClothing('right')">Move Right</button>
+    <button onclick="moveClothing('up')">Move Up</button>
+    <button onclick="moveClothing('down')">Move Down</button>
 </div>
 
 <script>
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+    const userImage = document.getElementById('userImage');
+    const clothingImage = document.getElementById('clothingImage');
+    const container = document.querySelector('.container');
+    const containerHeight = 500; // Fixed height of the box/container (in pixels)
+    const containerWidth = 300; // Fixed width of the box/container (in pixels)
 
-    const userImage = new Image();
-    const clothingImage = new Image();
-
-    let clothingX = 0; // Initialize to 0 for center alignment
-    let clothingY = 0; // Initialize to 0 for center alignment
-    let clothingWidth = 150;
-    let clothingHeight = 150;
-
-    // Function to get clothing dimensions based on selected size
-    function getClothingDimensions(size) {
-        switch (size) {
-            case 'small':
-                return { width: 66, height: 46 }; // in cm
-            case 'medium':
-                return { width: 70, height: 50 }; // in cm
-            case 'large':
-                return { width: 74, height: 54 }; // in cm
-            default:
-                return { width: 0, height: 0 };
-        }
-    }
+    // Initial position for clothing image
+    let clothingX = 0;
+    let clothingY = 0;
 
     function uploadImages() {
         const userFile = document.getElementById('userUpload').files[0];
@@ -114,10 +84,6 @@
             const userReader = new FileReader();
             userReader.onload = function (event) {
                 userImage.src = event.target.result; // Set the user's image
-                userImage.onload = () => {
-                    drawUserImage(); // Draw user image
-                    resizeClothing(); // Resize clothing after user image is loaded
-                };
             };
             userReader.readAsDataURL(userFile);
         }
@@ -126,64 +92,92 @@
             const clothingReader = new FileReader();
             clothingReader.onload = function (event) {
                 clothingImage.src = event.target.result; // Set the clothing image
-                clothingImage.onload = resizeClothing; // Resize clothing after loading
             };
             clothingReader.readAsDataURL(clothingFile);
         }
     }
 
-    // Function to draw user image
-    function drawUserImage() {
-        ctx.drawImage(userImage, 0, 0, canvas.width, canvas.height); // Scale to fit canvas
-    }
-
-    // Function to resize clothing based on user height
     function resizeClothing() {
-        const userHeightFeet = parseFloat(document.getElementById('userHeight').value);
-        if (!userHeightFeet) return; // Return if no height is provided
-
-        const userHeightCm = userHeightFeet * 30.48; // Convert feet to cm
+        const userHeight = parseFloat(document.getElementById('userHeight').value);
         const clothingSize = document.getElementById('clothingSize').value;
-        const { width: clothingLength, height: clothingHeightInCm } = getClothingDimensions(clothingSize);
 
-        const scaleFactor = clothingHeightInCm / userHeightCm; // Calculate scale factor
-        clothingWidth = clothingLength * scaleFactor; // Scale clothing width
-        clothingHeight = clothingHeightInCm * scaleFactor; // Scale clothing height
+        if (!userHeight) {
+            alert('Please enter your height.');
+            return;
+        }
 
-        drawClothing(); // Redraw clothing with updated dimensions
+        // Convert user height from feet to centimeters (1 foot = 30.48 cm)
+        const userHeightCm = userHeight * 30.48;
+
+        // Define real clothing dimensions (in cm) for small, medium, and large
+        let clothingLength, clothingWidth;
+        switch (clothingSize) {
+            case 'small':
+                clothingLength = 66;
+                clothingWidth = 46;
+                break;
+            case 'medium':
+                clothingLength = 70;
+                clothingWidth = 50;
+                break;
+            case 'large':
+                clothingLength = 74;
+                clothingWidth = 54;
+                break;
+            default:
+                alert('Please select a clothing size.');
+                return;
+        }
+
+        // Calculate the scaling factor to fit the clothing proportionally in the box
+        const scaleFactor = (clothingLength / userHeightCm); // Compare clothing length to user's height
+
+        // Calculate how much space the clothing should take in the box (relative to user height)
+        const clothingHeightInBox = containerHeight * scaleFactor; // Scaled clothing height in pixels
+        
+        // Set the clothing image size based on the calculated height in the box
+        clothingImage.style.height = `${clothingHeightInBox}px`;
+        clothingImage.style.width = 'auto'; // Maintain aspect ratio for width
     }
 
-    // Function to draw clothing image
-    function drawClothing() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-        drawUserImage(); // Redraw user image
-        ctx.drawImage(clothingImage, clothingX, clothingY, clothingWidth, clothingHeight); // Draw clothing
+    // Function to move the clothing image, ensuring it stays within bounds
+    function moveClothing(direction) {
+        const step = 10; // Pixels to move per click
+
+        // Get the clothing image's current size
+        const clothingRect = clothingImage.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        switch (direction) {
+            case 'left':
+                if (clothingX - step >= 0) {
+                    clothingX -= step;
+                }
+                break;
+            case 'right':
+                if (clothingX + step + clothingRect.width <= containerRect.width) {
+                    clothingX += step;
+                }
+                break;
+            case 'up':
+                if (clothingY - step >= 0) {
+                    clothingY -= step;
+                }
+                break;
+            case 'down':
+                if (clothingY + step + clothingRect.height <= containerRect.height) {
+                    clothingY += step;
+                }
+                break;
+        }
+
+        // Apply new position while preventing it from leaving the container
+        clothingImage.style.transform = `translate(${clothingX}px, ${clothingY}px)`;
     }
 
-    // Add event listeners for sliders and input fields
-    document.getElementById('x-position').addEventListener('input', (e) => {
-        clothingX = parseInt(e.target.value);
-        drawClothing();
-    });
-
-    document.getElementById('y-position').addEventListener('input', (e) => {
-        clothingY = parseInt(e.target.value);
-        drawClothing();
-    });
-
-    document.getElementById('width').addEventListener('input', (e) => {
-        clothingWidth = parseInt(e.target.value);
-        drawClothing();
-    });
-
-    document.getElementById('height').addEventListener('input', (e) => {
-        clothingHeight = parseInt(e.target.value);
-        drawClothing();
-    });
-
-    // Event listener for clothing size change
-    document.getElementById('clothingSize').addEventListener('change', resizeClothing);
-    document.getElementById('userHeight').addEventListener('input', resizeClothing);
+    // Resize clothing after both images are loaded
+    userImage.onload = resizeClothing;
+    clothingImage.onload = resizeClothing;
 </script>
 
 </body>
