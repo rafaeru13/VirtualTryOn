@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Overlay</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS -->
+</head>
+<body>
+
+<h2>Try it on!</h2>
+
+<div class="container">
+    <!-- Left: Presets Area -->
+    <div class="presets">
+        <img src="path_to_preset1.png" alt="Preset 1" onclick="selectPreset('path_to_preset1.png')">
+        <img src="path_to_preset2.png" alt="Preset 2" onclick="selectPreset('path_to_preset2.png')">
+        <img src="path_to_preset3.png" alt="Preset 3" onclick="selectPreset('path_to_preset3.png')">
+        <img src="path_to_preset4.png" alt="Preset 4" onclick="selectPreset('path_to_preset4.png')">
+    </div>
+
+    <!-- Center: Main Image Area -->
+    <div class="main-image">
+        <canvas id="canvas" width="300" height="500"></canvas>
+        <button id="overlayButton" onclick="uploadImages()">Overlay the Clothes</button>
+        <div class="loading">Processing image, please wait...</div>
+    </div>
+
+    <!-- Right: Control Panel -->
+    <div class="controls">
+        <div class="control">
+            <label>Enter Your Height (in ft):</label>
+            <input type="text" id="heightInput" placeholder="Enter your height">
+        </div>
+
+        <div class="control">
+            <label>Select Clothing Size:</label>
+            <select id="clothingSize">
+                <option value="small">Small (66cm x 46cm)</option>
+                <option value="medium">Medium (76cm x 56cm)</option>
+                <option value="large">Large (86cm x 66cm)</option>
+            </select>
+        </div>
+
+        <div class="control">
+            <label>Upload Full Body Image:</label>
+            <input type="file" id="userUpload" accept="image/*">
+        </div>
+
+        <div class="control">
+            <label>Upload Clothes Image:</label>
+            <input type="file" id="clothingUpload" accept="image/*">
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script> <!-- Link to your JavaScript -->
+</body>
+</html>
