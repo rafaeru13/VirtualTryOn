@@ -1,8 +1,8 @@
 const userImage = document.getElementById('userImage');
 const clothingImage = document.getElementById('clothingImage');
 const container = document.querySelector('.container');
-const containerHeight = 500; // Fixed height of the box/container (in pixels)
-const containerWidth = 300; // Fixed width of the box/container (in pixels)
+const containerHeight = 500; // Fixed height of the box
+const containerWidth = 300; // Fixed width of the box
 
 // Initial position for clothing image
 let clothingX = 0;
