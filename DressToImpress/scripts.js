@@ -73,7 +73,7 @@ function uploadImages() {
             clothingImage.src = event.target.result; // Set the clothing image
 
             // Remove background
-            const apiKey = 'vFw5rFNQVkgqjJbrK8PH1N99';  //HBzT8esCnrCctLiS4YuxfLTZ - guarin ... emG3uH22a7D3BGBbwAPht3qg - mot
+            const apiKey = 'vFw5rFNQVkgqjJbrK8PH1N99';  //HBzT8esCnrCctLiS4YuxfLTZ - guarin ... emG3uH22a7D3BGBbwAPht3qg - mot ... mike api here ... hans api here
             const formData = new FormData();
             formData.append('image_file', clothingFile);
             formData.append('size', 'auto');
