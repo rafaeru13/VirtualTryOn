@@ -6,7 +6,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    flex-direction: column; /* Make everything stack vertically */
+    flex-direction: column; /* Stack everything vertically */
 }
 
 .container {
@@ -17,7 +17,6 @@ body {
     background-color: #f2f2f2; /* Background color for visibility */
     border: 1px solid #ccc; /* Optional border for clarity */
 }
-
 
 #userImage {
     position: absolute; /* Position it absolutely */
@@ -34,10 +33,17 @@ body {
     left: 0; /* Start aligned with the user image */
     z-index: 2; /* Clothing image at the top */
     cursor: move; /* Indicate that the clothing image is draggable */
-    /*opacity: 0.8; /* Slightly transparent to see the user image underneath */
 }
 
+.sample-images {
+    display: flex;
+    gap: 10px; /* Add some space between images */
+    margin-top: 10px; /* Add some space above the sample images */
+}
 
-
-.controls {
+.sample-images img {
+    width: 100px; /* Set a fixed width for sample images */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border: 1px solid #ccc; /* Optional border for clarity */
+    border-radius: 5px; /* Optional rounded corners */
 }

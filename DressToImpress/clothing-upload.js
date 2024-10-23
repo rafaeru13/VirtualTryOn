@@ -41,90 +41,95 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-function uploadImages() {
-    const userFile = document.getElementById('userUpload').files[0];
+// Load user image from local storage
+window.onload = function() {
+    const userImageData = localStorage.getItem('userImage');
+    if (userImageData) {
+        document.getElementById('userImage').src = userImageData; // Set user image
+        resizeUserImage(); // Call resize function after setting the image
+    }
+};
+
+function uploadClothingImage() {
     const clothingFile = document.getElementById('clothingUpload').files[0];
 
-    // Check user image file type
-    if (userFile) {
-        const userFileType = userFile.type;
-        if (userFileType !== 'image/png' && userFileType !== 'image/jpeg') {
-            alert('Please upload a PNG or JPEG image for the user image.');
-            return; // Stop execution if the file type is invalid
-        }
-
-        const userReader = new FileReader();
-        userReader.onload = function (event) {
-            userImage.src = event.target.result; // Set the user's image
-        };
-        userReader.readAsDataURL(userFile);
+    if (!clothingFile || (clothingFile.type !== 'image/png' && clothingFile.type !== 'image/jpeg')) {
+        alert('Please upload a valid PNG or JPEG image for clothing.');
+        return;
     }
 
-    // Check clothing image file type
-    if (clothingFile) {
-        const clothingFileType = clothingFile.type;
-        if (clothingFileType !== 'image/png' && clothingFileType !== 'image/jpeg') {
-            alert('Please upload a PNG or JPEG image for the clothing image.');
-            return; // Stop execution if the file type is invalid
-        }
+    const clothingReader = new FileReader();
+    clothingReader.onload = async function(event) {
+        clothingImage.src = event.target.result; // Set clothing image
 
-        const clothingReader = new FileReader();
-        clothingReader.onload = async function (event) {
-            clothingImage.src = event.target.result; // Set the clothing image
+        // Background removal logic (similar to your previous code)
+        const apiKey = '';//'vFw5rFNQVkgqjJbrK8PH1N99';  //HBzT8esCnrCctLiS4YuxfLTZ - guarin ... emG3uH22a7D3BGBbwAPht3qg - mot ... mike api here ... hans api here
+        const formData = new FormData();
+        formData.append('image_file', clothingFile);
+        formData.append('size', 'auto');
 
-            // Remove background
-            const apiKey = 'vFw5rFNQVkgqjJbrK8PH1N99';  //HBzT8esCnrCctLiS4YuxfLTZ - guarin ... emG3uH22a7D3BGBbwAPht3qg - mot ... mike api here ... hans api here
-            const formData = new FormData();
-            formData.append('image_file', clothingFile);
-            formData.append('size', 'auto');
+        try {
+            const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+                method: 'POST',
+                headers: {
+                    'X-Api-Key': apiKey,
+                },
+                body: formData,
+            });
 
-            try {
-                const response = await fetch('https://api.remove.bg/v1.0/removebg', {
-                    method: 'POST',
-                    headers: {
-                        'X-Api-Key': apiKey,
-                    },
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    const blob = await response.blob();
-                    clothingImage.src = URL.createObjectURL(blob); // Set the image with removed background
-                } else {
-                    console.error('Error removing background:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error:', error);
+            if (response.ok) {
+                const blob = await response.blob();
+                clothingImage.src = URL.createObjectURL(blob); // Set the image with removed background
+            } else {
+                console.error('Error removing background:', response.statusText);
             }
-        };
-        clothingReader.readAsDataURL(clothingFile);
-    }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    clothingReader.readAsDataURL(clothingFile);
 }
 
+function useSampleClothing(imagePath) {
+    // Create a new image object
+    const sampleClothingImage = new Image();
+    sampleClothingImage.src = imagePath;
+
+    sampleClothingImage.onload = function() {
+        clothingImage.src = sampleClothingImage.src; // Set the sample clothing image
+
+        // Optional: If you want to apply background removal on sample images
+        // You can add the background removal logic here as needed
+    };
+}
+
+// Resize user image after it is loaded
+userImage.onload = function() {
+    resizeUserImage(); // Resize the user image to fit in the container
+    resizeClothing(); // Resize clothing after user image is resized
+};
+
+// Function to resize user image to fit in the container
 function resizeUserImage() {
     const userImageRect = userImage.getBoundingClientRect();
     
-    // Define the maximum width and height based on the container
     const maxWidth = containerWidth;   // Container width
     const maxHeight = containerHeight;  // Container height
 
-    // Calculate the scaling factor to fit the user image within the container dimensions
     const scaleX = maxWidth / userImageRect.width;
     const scaleY = maxHeight / userImageRect.height;
     const scaleFactor = Math.min(scaleX, scaleY); // Use the smaller scaling factor to maintain aspect ratio
 
-    // Set the user image size based on the scaling factor
     userImage.style.width = `${userImageRect.width * scaleFactor}px`;
     userImage.style.height = `${userImageRect.height * scaleFactor}px`;
 
-    // Center the user image vertically and horizontally within the container
     const centerX = (maxWidth - userImageRect.width * scaleFactor) / 2;
     const centerY = (maxHeight - userImageRect.height * scaleFactor) / 2;
 
-    // Set translate to center the image based on its new size
     userImage.style.transform = `translate(${centerX}px, ${centerY}px)`; 
 }
 
+// Function to resize clothing based on user height and selected size
 function resizeClothing() {
     const userHeight = parseFloat(document.getElementById('userHeight').value);
     const clothingSize = document.getElementById('clothingSize').value;
@@ -136,7 +141,6 @@ function resizeClothing() {
 
     const userHeightCm = userHeight;
 
-    // Define real clothing dimensions (in cm) for small, medium, and large
     let clothingLength, clothingWidth;
     switch (clothingSize) {
         case 'small':
@@ -156,22 +160,12 @@ function resizeClothing() {
             return;
     }
 
-    // Calculate the scaling factor to fit the clothing proportionally in the box
     const scaleFactor = (clothingLength / userHeightCm); // Compare clothing length to user's height
-
-    // Calculate how much space the clothing should take in the box (relative to user height)
     const clothingHeightInBox = containerHeight * scaleFactor; // Scaled clothing height in pixels
 
-    // Set the clothing image size based on the calculated height in the box
     clothingImage.style.height = `${clothingHeightInBox}px`;
     clothingImage.style.width = 'auto'; // Maintain aspect ratio for width
 }
-
-// Resize user image after it is loaded
-userImage.onload = function() {
-    resizeUserImage(); // Resize the user image to fit in the container
-    resizeClothing(); // Resize clothing after user image is resized
-};
 
 // Resize clothing image after it is loaded
 clothingImage.onload = resizeClothing;

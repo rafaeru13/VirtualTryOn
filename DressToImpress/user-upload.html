@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Upload</title>
+    <link rel="stylesheet" href="user-upload.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Your Image</h2>
+        <input type="file" id="userUpload" accept="image/png, image/jpeg">
+        <button onclick="uploadImages()">Next Step</button>
+        
+        <p>No image? Try one of these:</p>
+        <div class="sample-images">
+            <img src="User sample/man1.jpg" alt="Sample 1" class="sample" onclick="useSampleImage('User sample/man1.jpg')">
+            <img src="User sample/man2.png" alt="Sample 2" class="sample" onclick="useSampleImage('User sample/man2.png')">
+            <img src="path/to/sample3.jpg" alt="Sample 3" class="sample" onclick="useSampleImage('path/to/sample3.jpg')">
+        </div>
+    </div>
+    
+    <script src="user-upload.js"></script>
+</body>
+</html>
