@@ -1,0 +1,34 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    flex-direction: column; /* Make everything stack vertically */
+}
+
+.container {
+    text-align: center; /* Center the text */
+}
+
+.sample-images {
+    display: flex;
+    justify-content: center; /* Center the images */
+    margin-top: 10px;
+}
+
+.sample {
+    width: 100px; /* Set a fixed width for sample images */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 10px; /* Add some space between images */
+    cursor: pointer; /* Indicate that these are clickable */
+    border: 1px solid #ccc; /* Optional border for clarity */
+    border-radius: 5px; /* Rounded corners */
+    transition: transform 0.2s; /* Smooth scaling effect */
+}
+
+.sample:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
